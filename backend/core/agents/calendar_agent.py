@@ -1,6 +1,7 @@
-from agents.basic_agent import BaseAgent
-from agents.models.langchain_adapter import LangchainAdapter
 from pydantic import BaseModel
+
+from backend.adapters.output.ai.langchain_adapter import LangchainAdapter
+from backend.core.agents.base_agent import BaseAgent
 
 
 class CalendarAgentResponse(BaseModel):
