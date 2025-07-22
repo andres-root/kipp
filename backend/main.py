@@ -2,7 +2,12 @@ import argparse
 
 import uvicorn
 
-from app.adapters.output.db.db import migrate, reset
+from backend.adapters.input.rest.routes import (
+    app,  # Required for uvicorn to find the app
+)
+from backend.adapters.output.db.db import migrate, reset
+
+fastapi_app = app
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Start FastAPI server with custom host and port")
@@ -24,7 +29,7 @@ if __name__ == "__main__":
 
     if args.env == "prod" or args.env == "staging":
         uvicorn.run(
-            "main:app",
+            "backend.main:fastapi_app",
             host=args.host,
             port=args.port,
             workers=4,
@@ -35,4 +40,4 @@ if __name__ == "__main__":
             forwarded_allow_ips="*",
         )
     else:
-        uvicorn.run("main:app", host=args.host, port=args.port, reload=True)
+        uvicorn.run("backend.main:fastapi_app", host=args.host, port=args.port, reload=True)

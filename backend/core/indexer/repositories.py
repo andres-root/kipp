@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.adapters.output.db import get_db_session
-from app.ports.singleton_meta import SingletonMeta
+from backend.adapters.output.db import get_db_session
+from backend.ports.singleton_meta import SingletonMeta
 
 
 class IndexerRepository(metaclass=SingletonMeta):

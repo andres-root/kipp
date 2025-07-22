@@ -1,12 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
-from app.settings import get_settings
+from backend.settings import get_settings
 
 settings = get_settings()
-
 Base = declarative_base()
-engine = create_engine(settings.db_connection_string)
+engine = create_engine(settings.db_connection_string, connect_args={"options": "-c timezone=utc"})
 
 
 def get_db_session() -> Session | None:
